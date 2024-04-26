@@ -12,7 +12,7 @@ const MainScreen = ({ navigation }) => {
         paddingTop="6px"
         paddingLeft="20px"
         paddingRight="20px"
-        bg="warmGray.200"
+        bg="white"
       >
         <HeaderComponnet navigation={navigation} />
         <FooterComponent navigation={navigation} />

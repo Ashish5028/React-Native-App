@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text } from "react-native";
+
+import { NativeBaseProvider } from "native-base";
+import RouteScreen from "./src/api/route";
 
 const App = () => {
   return (
-    <View className="flex items-center justify-center  h-full">
-      <Text className="text-xl font-bold">Hello, Tailwind!</Text>
-      <Text className="text-xl text-red-500 font-bold"> Ashish singh</Text>
-    </View>
+    <NativeBaseProvider>
+      <RouteScreen />
+    </NativeBaseProvider>
   );
 };
 

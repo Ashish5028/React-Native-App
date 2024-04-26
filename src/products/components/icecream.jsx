@@ -7,7 +7,11 @@ const Icecream = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    const result = axios.get("https://fakestoreapi.com/products/1");
+    const result = async () => {
+      const response = await fetch("");
+      const data = await response.json();
+      console.log(data);
+    };
     return result;
   }, []);
 

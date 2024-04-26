@@ -1,8 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import MainScreen from "../home/main";
-import { Button, Text, View } from "native-base";
+import { View } from "native-base";
 import LoginUser from "../user/login";
 import CartItems from "../home/components/cartItems";
 

@@ -1,45 +1,51 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Icon,
-  NativeBaseProvider,
-  Text,
-  VStack,
-  View,
-} from "native-base";
+import { Button, Text, View } from "native-base";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 export default function FooterComponent({ navigation }) {
-  const ButtonCom = ({ navigationTitle, title }) => {
+  const ButtonCom = ({ navigationTitle, title, titleIcon }) => {
     return (
       <>
-        <VStack alignItems="center" style={{ backgroundColor: "white" }}>
+        <View className="flex-col items-center rounded-md">
           <Button
-            colorScheme="white"
+            // colorScheme="white"
+            className="bg-white"
             onPress={() => navigation.navigate(navigationTitle)}
           >
-            <MaterialCommunityIcons
-              name="account-box-outline"
-              size={40}
-              color="black"
-            />
-            <Text>{title}</Text>
+            {titleIcon}
           </Button>
-        </VStack>
+          <Text>{title}</Text>
+        </View>
       </>
     );
   };
   return (
     <>
-      <View>
-        <HStack justifyContent="space-between">
-          <ButtonCom navigationTitle="Home" title="Home" />
-          <ButtonCom navigationTitle="login" title="Products" />
-          <ButtonCom navigationTitle="login" title="Home" />
-          <ButtonCom navigationTitle="login" title="Account" />
-        </HStack>
+      <View className=" flex-row justify-between items-center">
+        <ButtonCom
+          navigationTitle="Home"
+          title="Home"
+          titleIcon={<AntDesign name="home" size={30} />}
+        />
+        <ButtonCom
+          navigationTitle="login"
+          title="Products"
+          titleIcon={<Ionicons name="storefront-outline" size={30} />}
+        />
+        <ButtonCom
+          navigationTitle="login"
+          title="Products"
+          titleIcon={
+            <MaterialCommunityIcons name="account-box-outline" size={30} />
+          }
+        />
+        <ButtonCom
+          navigationTitle="login"
+          title="Account"
+          titleIcon={<FontAwesome5 name="user" size={27} />}
+        />
       </View>
     </>
   );

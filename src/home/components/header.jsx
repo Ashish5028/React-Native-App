@@ -8,6 +8,8 @@ import {
 } from "native-base";
 
 import { AntDesign } from "@expo/vector-icons";
+import HomeComponent from "./home";
+import SimpleSlider from "../../products/components/chocolate";
 export default function HeaderComponnet({ navigation }) {
   return (
     <>
@@ -28,6 +30,8 @@ export default function HeaderComponnet({ navigation }) {
             <AntDesign name="shoppingcart" size={30} color="black" />
           </Button>
         </HStack>
+        <HomeComponent />
+        <SimpleSlider />
       </NativeBaseProvider>
     </>
   );
