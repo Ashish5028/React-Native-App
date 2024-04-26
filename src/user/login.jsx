@@ -26,13 +26,14 @@ const LoginUser = () => {
           Welcome
         </Heading>
         <Heading
-          mt="1"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          color="coolGray.600"
-          fontWeight="medium"
-          size="xs"
+          className="text-red-300"
+          // mt="1"
+          // _dark={{
+          //   color: "warmGray.200",
+          // }}
+          // color="coolGray.600"
+          // fontWeight="medium"
+          // size="xs"
         >
           Sign in to continue!
         </Heading>
