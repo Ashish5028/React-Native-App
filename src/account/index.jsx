@@ -2,14 +2,12 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome6 } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Button } from "native-base";
-import { SimpleLineIcons } from "@expo/vector-icons";
 
-const AccountScreen = ({ navigation }) => {
+import { FontAwesome6 } from "@expo/vector-icons";
+
+import NavigationButton from "./components/navigationButton";
+
+const AccountScreen = () => {
   const UseableComp = ({ title1, title2, title1Icon, title2Icon }) => {
     return (
       <>
@@ -27,63 +25,6 @@ const AccountScreen = ({ navigation }) => {
     );
   };
 
-  const RepetableButton = ({ screenName, componentName, componentIcon }) => {
-    return (
-      <>
-        <Button
-          className="bg-zinc-100 border-b pb-4 border-zinc-400"
-          onPress={() => navigation.navigate(screenName)}
-        >
-          <View className="flex-row  items-center justify-between w-full">
-            <View className="flex-row items-center space-x-3">
-              {componentIcon}
-              <Text>{componentName}</Text>
-            </View>
-            <AntDesign name="right" size={24} color="black" />
-          </View>
-        </Button>
-      </>
-    );
-  };
-  const NavigationButton = () => {
-    return (
-      <>
-        <View className=" py-1 justify-between h-96">
-          <RepetableButton
-            componentName="Personal Information"
-            screenName="Personal Information"
-            componentIcon={<AntDesign name="user" size={24} color="black" />}
-          />
-          <RepetableButton
-            componentName="Saved Addresses"
-            screenName="Saved Addresses"
-            componentIcon={
-              <SimpleLineIcons name="location-pin" size={24} color="black" />
-            }
-          />
-          <RepetableButton
-            componentName="Share App Feedback"
-            screenName="Saved Addresses"
-            componentIcon={
-              <Entypo name="new-message" size={20} color="black" />
-            }
-          />
-          <RepetableButton
-            componentName="Privacy Policy"
-            screenName="Saved Addresses"
-            componentIcon={<MaterialIcons name="privacy-tip" size={24} />}
-          />
-          <RepetableButton
-            componentName="Logout"
-            screenName="Saved Addresses"
-            componentIcon={
-              <MaterialIcons name="logout" size={24} color="black" />
-            }
-          />
-        </View>
-      </>
-    );
-  };
   return (
     <View className="space-y-5">
       <View className="px-4 space-y-1 py-4 bg-stone-200">
