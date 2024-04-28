@@ -1,17 +1,42 @@
 import {
   Box,
-  Button,
   Center,
   FormControl,
   HStack,
   Heading,
   Input,
+  Button,
   Link,
   Text,
   VStack,
 } from "native-base";
+import { useState } from "react";
+import RegisterUser from "./register";
 
-const LoginUser = () => {
+const LoginUser = ({ navigation }) => {
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleUserLogin = async () => {
+    const result = await fetch("http://localhost:3001/api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ login }),
+    });
+    console.log("response", result);
+    // if (result.ok) {
+    //   let data = await result.json();
+    //   let auth = data.auth;
+    //   let name = data.data.name;
+    //   let category = data.data.category;
+    //   localStorage.setItem("auth", auth);
+    //   localStorage.setItem("User", name);
+    //   localStorage.setItem("Category", category);
+    // }
+  };
+  // console.log("email", login);
   return (
     <Center w="100%">
       <Box safeArea p="0" py="8" w="90%" maxW="290" marginTop="10">
@@ -26,26 +51,29 @@ const LoginUser = () => {
           Welcome
         </Heading>
         <Heading
-          className="text-red-300"
-          // mt="1"
-          // _dark={{
-          //   color: "warmGray.200",
-          // }}
-          // color="coolGray.600"
-          // fontWeight="medium"
-          // size="xs"
+          mt="1"
+          _dark={{
+            color: "warmGray.200",
+          }}
+          color="coolGray.600"
+          fontWeight="medium"
+          size="xs"
         >
-          Sign in to continue!
+          Login in to continue!
         </Heading>
 
         <VStack space={5} mt="5">
           <FormControl>
+            <FormControl.Label>Name</FormControl.Label>
+            <Input type="text" onChangeText={(e) => setLogin(e)} />
+          </FormControl>
+          <FormControl>
             <FormControl.Label>Email ID</FormControl.Label>
-            <Input type="text" />
+            <Input type="email" onChangeText={(e) => setLogin(e)} />
           </FormControl>
           <FormControl>
             <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" />
+            <Input type="password" onChangeText={(e) => setLogin(e)} />
             <Link
               _text={{
                 fontSize: "xs",
@@ -59,30 +87,9 @@ const LoginUser = () => {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="1" colorScheme="indigo">
+          <Button mt="1" colorScheme="indigo" onPress={handleUserLogin}>
             Sign in
           </Button>
-          <HStack mt="6" justifyContent="center">
-            <Text
-              fontSize="sm"
-              color="coolGray.600"
-              _dark={{
-                color: "warmGray.200",
-              }}
-            >
-              I'm a new user.{" "}
-            </Text>
-            <Link
-              _text={{
-                color: "indigo.500",
-                fontWeight: "medium",
-                fontSize: "sm",
-              }}
-              href="#"
-            >
-              Sign Up
-            </Link>
-          </HStack>
         </VStack>
       </Box>
     </Center>

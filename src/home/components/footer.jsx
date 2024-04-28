@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 export default function FooterComponent({ navigation }) {
   const ButtonCom = ({ navigationTitle, title, titleIcon }) => {
     return (
@@ -30,21 +31,21 @@ export default function FooterComponent({ navigation }) {
           titleIcon={<AntDesign name="home" size={30} />}
         />
         <ButtonCom
-          navigationTitle="login"
+          navigationTitle="SignIn"
           title="Products"
           titleIcon={<Ionicons name="storefront-outline" size={30} />}
         />
         <ButtonCom
-          navigationTitle="login"
+          navigationTitle="SignIn"
           title="Products"
           titleIcon={
             <MaterialCommunityIcons name="account-box-outline" size={30} />
           }
         />
         <ButtonCom
-          navigationTitle="login"
+          navigationTitle="Account"
           title="Account"
-          titleIcon={<FontAwesome5 name="user" size={27} />}
+          titleIcon={<EvilIcons name="user" size={40} color="black" />}
         />
       </View>
     </>

@@ -9,7 +9,6 @@ const MainScreen = ({ navigation }) => {
       <VStack
         h="full"
         paddingBottom="10px"
-        paddingTop="6px"
         paddingLeft="20px"
         paddingRight="20px"
         bg="white"
