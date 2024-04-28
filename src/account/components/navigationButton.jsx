@@ -1,15 +1,15 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { Button, Text, View } from "native-base";
+import { Button, Text, VStack, View } from "native-base";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
-export default function NavigationButton() {
+export default function NavigationButton({ navigation }) {
   const RepetableButton = ({ screenName, componentName, componentIcon }) => {
     return (
       <>
         <Button
-          className="bg-zinc-100 border-b pb-4 border-zinc-400"
+          className="bg-zinc-100 border-b pb-3 border-zinc-400"
           onPress={() => navigation.navigate(screenName)}
         >
           <View className="flex-row  items-center justify-between w-full">
@@ -26,7 +26,7 @@ export default function NavigationButton() {
   const NavigeButton = () => {
     return (
       <>
-        <View className=" py-1 justify-between h-96">
+        <VStack space={7} marginTop={3}>
           <RepetableButton
             componentName="Personal Information"
             screenName="Personal Information"
@@ -58,7 +58,7 @@ export default function NavigationButton() {
               <MaterialIcons name="logout" size={24} color="black" />
             }
           />
-        </View>
+        </VStack>
       </>
     );
   };

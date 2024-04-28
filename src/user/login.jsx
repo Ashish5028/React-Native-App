@@ -39,30 +39,8 @@ const LoginUser = ({ navigation }) => {
   // console.log("email", login);
   return (
     <Center w="100%">
-      <Box safeArea p="0" py="8" w="90%" maxW="290" marginTop="10">
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          Welcome
-        </Heading>
-        <Heading
-          mt="1"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          color="coolGray.600"
-          fontWeight="medium"
-          size="xs"
-        >
-          Login in to continue!
-        </Heading>
-
-        <VStack space={5} mt="5">
+      <Box safeArea w="90%" maxW="290">
+        <VStack space={4} mt="5">
           <FormControl>
             <FormControl.Label>Name</FormControl.Label>
             <Input type="text" onChangeText={(e) => setLogin(e)} />
