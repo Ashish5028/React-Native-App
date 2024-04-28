@@ -9,9 +9,12 @@ import {
   Link,
   Text,
   VStack,
+  Image,
+  ScrollView,
 } from "native-base";
 import { useState } from "react";
 import RegisterUser from "./register";
+import loginimg from "../../assets/login.png";
 
 const LoginUser = ({ navigation }) => {
   const [login, setLogin] = useState({
@@ -39,37 +42,39 @@ const LoginUser = ({ navigation }) => {
   // console.log("email", login);
   return (
     <Center w="100%">
-      <Box safeArea w="90%" maxW="290">
-        <VStack space={4} mt="5">
-          <FormControl>
-            <FormControl.Label>Name</FormControl.Label>
-            <Input type="text" onChangeText={(e) => setLogin(e)} />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Email ID</FormControl.Label>
-            <Input type="email" onChangeText={(e) => setLogin(e)} />
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" onChangeText={(e) => setLogin(e)} />
-            <Link
-              _text={{
-                fontSize: "xs",
-                fontWeight: "500",
-                color: "indigo.500",
-                marginTop: "3",
-              }}
-              alignSelf="flex-end"
-              mt="1"
-            >
-              Forget Password?
-            </Link>
-          </FormControl>
-          <Button mt="1" colorScheme="indigo" onPress={handleUserLogin}>
-            Sign in
-          </Button>
-        </VStack>
-      </Box>
+      <ScrollView>
+        <Box safeArea width="screen" px="10" height="full">
+          <VStack space={5}>
+            <FormControl>
+              <Image source={loginimg} alt="loginImage" height={"32"} />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Email ID</FormControl.Label>
+              <Input type="email" onChangeText={(e) => setLogin(e)} />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Password</FormControl.Label>
+              <Input type="password" onChangeText={(e) => setLogin(e)} />
+            </FormControl>
+            <VStack>
+              <Button
+                mt="3"
+                colorScheme="indigo"
+                height="12"
+                onPress={handleUserLogin}
+              >
+                Sign in
+              </Button>
+              <Button
+                className="flex-row justify-end bg-zinc-100 mt-3"
+                onPress={() => navigation.navigate("SignUp")}
+              >
+                <Text className="text-indigo-600">Go for SignUp</Text>
+              </Button>
+            </VStack>
+          </VStack>
+        </Box>
+      </ScrollView>
     </Center>
   );
 };
