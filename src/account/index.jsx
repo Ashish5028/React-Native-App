@@ -3,9 +3,12 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
-import NavigationButton from "./components/navigationButton";
+
 import { Button, HStack, Image, ScrollView, VStack } from "native-base";
 import loginimg from "../../assets/login.png";
+
+import RenderButton from "../common/Button";
+import NavigationButton from "../api/navigateComponents";
 
 const AccountScreen = ({ navigation }) => {
   const UseableComp = ({ title1, title2, title1Icon, title2Icon }) => {
@@ -29,22 +32,27 @@ const AccountScreen = ({ navigation }) => {
     <>
       <ScrollView>
         <View className="space-y-5">
-          <View className="border-b pb-5 border-zinc-400">
+          <View className="border-b pb-5 border-zinc-400 mt-3">
             {user && user.email && user.name ? (
               <View className="px-4 space-y-1 py-4 bg-stone-200">
                 <Text className="text-lg font-medium">{user.name}</Text>
                 <Text>{user.email}</Text>
               </View>
             ) : (
-              <View className=" px-3 space-y-2">
-                <Image source={loginimg} alt="lognImage" height="24" />
-                <Button
-                  height="12"
-                  className="bg-indigo-600"
-                  onPress={() => navigation.navigate("SignIn")}
-                >
-                  SignIn / SignUp
-                </Button>
+              <View className=" py-2 px-3 space-y-2">
+                <Image
+                  source={loginimg}
+                  alt="lognImage"
+                  height="24"
+                  marginBottom={4}
+                />
+                <RenderButton
+                  navigation={navigation}
+                  rendercomponentname="SignIn / SignUp"
+                  renderscreen="SignIn"
+                  bgColor="bg-indigo-600 h-11"
+                  textColor="text-white"
+                />
               </View>
             )}
           </View>

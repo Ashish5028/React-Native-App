@@ -2,7 +2,7 @@
 import { Image, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
-import { ScrollView } from "native-base";
+import { HStack, ScrollView, VStack } from "native-base";
 
 const HomeComponent = () => {
   // State to store the fetched data
@@ -37,30 +37,28 @@ const HomeComponent = () => {
   }
 
   return (
-    <View className="flex-row space-x-2 ">
-      <ScrollView horizontal={true} style={styles.container}>
-        {data.map((ele) => {
-          return (
-            <View className=" flex-col  ">
-              <View
-                style={[styles.card, styles.cardElevated]}
-                className="px-2 py-2 space-y-1"
-              >
-                <Image
-                  source={{ uri: `${ele.image}` }}
-                  className="h-20 w-20 rounded-md "
-                />
-                <Text>{ele.category}</Text>
-                <View className="flex-row items-center justify-between space-x-2">
-                  <Text>{ele.rating?.count}</Text>
-                  <Text>{ele.rating?.rate}</Text>
-                </View>
+    <ScrollView>
+      {data.map((ele) => {
+        return (
+          <HStack className=" flex-col  ">
+            <HStack
+              style={[styles.card, styles.cardElevated]}
+              className="px-2 py-2 space-y-1"
+            >
+              <Image
+                source={{ uri: `${ele.image}` }}
+                className="h-20 w-20 rounded-md "
+              />
+              <Text>{ele.category}</Text>
+              <View className="flex-row items-center justify-between space-x-2">
+                <Text>{ele.rating?.count}</Text>
+                <Text>{ele.rating?.rate}</Text>
               </View>
-            </View>
-          );
-        })}
-      </ScrollView>
-    </View>
+            </HStack>
+          </HStack>
+        );
+      })}
+    </ScrollView>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Button, Text, View } from "native-base";
+import { Button, HStack, Text, View } from "native-base";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -11,7 +11,6 @@ export default function FooterComponent({ navigation }) {
       <>
         <View className="flex-col items-center rounded-md">
           <Button
-            // colorScheme="white"
             className="bg-white"
             onPress={() => navigation.navigate(navigationTitle)}
           >
@@ -24,30 +23,36 @@ export default function FooterComponent({ navigation }) {
   };
   return (
     <>
-      <View className=" flex-row justify-between items-center">
+      <HStack className=" flex-row justify-between items-end">
         <ButtonCom
           navigationTitle="Home"
           title="Home"
-          titleIcon={<AntDesign name="home" size={30} />}
+          titleIcon={<AntDesign name="home" size={25} />}
         />
         <ButtonCom
-          navigationTitle="SignIn"
+          navigationTitle="Products"
           title="Products"
-          titleIcon={<Ionicons name="storefront-outline" size={30} />}
+          titleIcon={<Ionicons name="storefront-outline" size={25} />}
         />
         <ButtonCom
-          navigationTitle="SignIn"
+          navigationTitle="Products"
           title="Products"
           titleIcon={
-            <MaterialCommunityIcons name="account-box-outline" size={30} />
+            <MaterialCommunityIcons name="account-box-outline" size={25} />
           }
         />
         <ButtonCom
           navigationTitle="Account"
           title="Account"
-          titleIcon={<EvilIcons name="user" size={40} color="black" />}
+          titleIcon={
+            <MaterialCommunityIcons
+              name="account-circle-outline"
+              size={24}
+              color="black"
+            />
+          }
         />
-      </View>
+      </HStack>
     </>
   );
 }

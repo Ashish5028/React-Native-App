@@ -1,12 +1,10 @@
-import React from "react";
-
 import { NativeBaseProvider } from "native-base";
-import RouteScreen from "./src/api/route";
+import NavigationScreen from "./src/api/route";
 
 const App = () => {
   return (
     <NativeBaseProvider>
-      <RouteScreen />
+      <NavigationScreen />
     </NativeBaseProvider>
   );
 };
