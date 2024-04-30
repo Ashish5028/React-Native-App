@@ -3,13 +3,13 @@ import { Image, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import { HStack, ScrollView, VStack } from "native-base";
+import { useDispatch } from "react-redux";
+import { addtoCart } from "../../user/userSlice";
 
 const HomeComponent = () => {
-  // State to store the fetched data
   const [data, setData] = useState(null);
-  // State to track loading state
   const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
       try {

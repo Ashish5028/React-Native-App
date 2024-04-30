@@ -1,16 +1,25 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
-
 import { Button, HStack, Image, ScrollView, VStack } from "native-base";
 import loginimg from "../../assets/login.png";
-
 import RenderButton from "../common/Button";
 import NavigationButton from "../api/navigateComponents";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AccountScreen = ({ navigation }) => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  let user = { name: name, email: email };
+  const getData = async () => {
+    const name = await AsyncStorage.getItem("username");
+    const email = await AsyncStorage.getItem("useremail");
+    setName(name);
+    setEmail(email);
+  };
+  getData();
   const UseableComp = ({ title1, title2, title1Icon, title2Icon }) => {
     return (
       <>
@@ -27,7 +36,7 @@ const AccountScreen = ({ navigation }) => {
       </>
     );
   };
-  let user = { name: "Unknow User", email: "" };
+
   return (
     <>
       <ScrollView>

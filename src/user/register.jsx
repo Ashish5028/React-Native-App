@@ -3,59 +3,82 @@ import {
   Button,
   Center,
   FormControl,
-  HStack,
-  Heading,
   Image,
   Input,
-  Link,
-  Radio,
   ScrollView,
   Text,
   VStack,
 } from "native-base";
 import loginimg from "../../assets/login.png";
-import { useRef } from "react";
-import { Platform } from "react-native";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const RegisterUser = ({ navigation }) => {
-  const myRef = useRef({});
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const getData = async () => {
+    const values = await AsyncStorage.getItem("useremail");
+    console.log("value", values);
+  };
+  getData();
+  const handleLogin = () => {
+    dispatch(RegisterUser({ name, email, password }));
+    // dispatch(RegisterUser());
+    navigation.navigate("Home");
+  };
+  useEffect(() => {}, []);
+
   return (
     <Center w="100%">
       <ScrollView>
         <Box safeArea width="screen" px="10" height="full">
           <Image source={loginimg} alt="loginImage" height={"32"} />
           <VStack space={5}>
-            <Radio.Group onChange={(value) => {}}>
-              <HStack className="flex-row justify-between w-full px-1">
-                <Radio colorScheme="success" value="1" my={1}>
-                  Seller
-                </Radio>
-                <Radio colorScheme="success" ref={myRef} value="2" my={1}>
-                  User
-                </Radio>
-              </HStack>
-            </Radio.Group>
-
             <FormControl>
               <FormControl.Label>Name</FormControl.Label>
-              <Input type="text" onChangeText={(e) => setLogin(e)} />
+              <Input
+                type="text"
+                value={name}
+                onChangeText={(e) => setName(e)}
+              />
             </FormControl>
             <FormControl>
               <FormControl.Label>Email ID</FormControl.Label>
-              <Input type="email" onChangeText={(e) => setLogin(e)} />
+              <Input
+                type="email"
+                value={email}
+                onChangeText={(e) => setEmail(e)}
+              />
             </FormControl>
             <FormControl>
               <FormControl.Label>Password</FormControl.Label>
-              <Input type="password" onChangeText={(e) => setLogin(e)} />
+              <Input
+                type="password"
+                value={password}
+                secureTextEntry={true}
+                onChangeText={(e) => setPassword(e)}
+              />
             </FormControl>
-            <Button
-              mt="3"
-              colorScheme="indigo"
-              height="12"
-              onPress={(e) => handleUserLogin(e)}
-            >
-              Sign in
-            </Button>
+            <VStack>
+              <Button
+                mt="3"
+                colorScheme="indigo"
+                height="12"
+                onPress={handleLogin}
+              >
+                Sign in
+              </Button>
+              <Button
+                className="flex-row justify-end bg-zinc-100 mt-3"
+                onPress={() => navigation.navigate("SignIn")}
+              >
+                <Text className="text-indigo-600">Go for SignUp</Text>
+              </Button>
+            </VStack>
           </VStack>
         </Box>
       </ScrollView>

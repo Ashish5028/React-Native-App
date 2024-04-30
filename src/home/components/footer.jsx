@@ -5,7 +5,16 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useState } from "react";
 export default function FooterComponent({ navigation }) {
+  const [name, setName] = useState();
+
+  const getData = async () => {
+    const name = await AsyncStorage.getItem("username");
+    setName(name);
+  };
+  getData();
   const ButtonCom = ({ navigationTitle, title, titleIcon }) => {
     return (
       <>
@@ -41,17 +50,19 @@ export default function FooterComponent({ navigation }) {
             <MaterialCommunityIcons name="account-box-outline" size={25} />
           }
         />
-        <ButtonCom
-          navigationTitle="Account"
-          title="Account"
-          titleIcon={
+        <View className="flex-col items-center rounded-md ">
+          <Button
+            className="bg-white"
+            onPress={() => navigation.navigate("Account")}
+          >
             <MaterialCommunityIcons
               name="account-circle-outline"
               size={24}
               color="black"
             />
-          }
-        />
+          </Button>
+          {name ? <Text>{name}</Text> : <Text>Account</Text>}
+        </View>
       </HStack>
     </>
   );

@@ -1,13 +1,23 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { VStack, View } from "native-base";
+import { Button, Text, VStack, View } from "native-base";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import RenderButton from "../common/Button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useState } from "react";
 
-export default function NavigationButton({ navigation }) {
-  const seller = "Abhishek";
-
+const NavigationButton = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const clearstore = async () => {
+    await AsyncStorage.clear();
+    navigation.navigate("Home");
+  };
+  const logoutButtonShowHide = async () => {
+    let name = await AsyncStorage.getItem("name");
+    setName(name);
+  };
+  logoutButtonShowHide();
   const NavigateButton = () => {
     return (
       <>
@@ -39,17 +49,24 @@ export default function NavigationButton({ navigation }) {
             logoIcon={<MaterialIcons name="privacy-tip" size={24} />}
             navigation={navigation}
             rendercomponentname="Privacy Policy"
-            renderscreen="Privacy/Policy"
-            rightArrowIcon={<AntDesign name="right" size={24} color="black" />}
-          />
-          <RenderButton
-            logoIcon={<MaterialIcons name="logout" size={24} color="black" />}
-            navigation={navigation}
-            rendercomponentname="Logout"
             renderscreen="Saved Addresses"
             rightArrowIcon={<AntDesign name="right" size={24} color="black" />}
           />
-          {seller ? (
+
+          <Button
+            className="bg-zinc-100 border-b-2 border-zinc-400"
+            onPress={clearstore}
+          >
+            <View className="flex-row  items-center justify-between w-full">
+              <View className="flex-row items-center space-x-3">
+                <MaterialIcons name="logout" size={24} color="black" />
+                <Text>Logout</Text>
+              </View>
+              <AntDesign name="right" size={24} color="black" />
+            </View>
+          </Button>
+
+          {/* {seller ? (
             <RenderButton
               logoIcon={
                 <MaterialIcons
@@ -65,7 +82,7 @@ export default function NavigationButton({ navigation }) {
                 <AntDesign name="right" size={24} color="black" />
               }
             />
-          ) : null}
+          ) : null} */}
         </VStack>
       </>
     );
@@ -77,4 +94,6 @@ export default function NavigationButton({ navigation }) {
       </View>
     </>
   );
-}
+};
+
+export default NavigationButton;

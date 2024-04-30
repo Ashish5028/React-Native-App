@@ -1,13 +1,19 @@
-import {
-  Box,
-  Center,
-  Flex,
-  Heading,
-  ScrollView,
-  Text,
-  VStack,
-} from "native-base";
+import { createUserApi } from "./api/apiConfig";
 
-export default function IndexPage() {
-  return <Text className="text-5xl text-red-400">hello</Text>;
-}
+export const CreateUser = async ({ name, email, password }) => {
+  const response = await fetch(createUserApi, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password }),
+  });
+  try {
+    if (response.ok) {
+      const result = await response.json();
+      console.log("result", result);
+
+      return result;
+    }
+  } catch (error) {
+    return rejectWithValue(error);
+  }
+};

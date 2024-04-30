@@ -13,61 +13,57 @@ import {
   ScrollView,
 } from "native-base";
 import { useState } from "react";
-import RegisterUser from "./register";
+
 import loginimg from "../../assets/login.png";
 
-const LoginUser = ({ navigation }) => {
-  const [login, setLogin] = useState({
-    email: "",
-    password: "",
-  });
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
 
-  const handleUserLogin = async () => {
-    const result = await fetch("http://localhost:3001/api/user/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ login }),
-    });
-    console.log("response", result);
-    // if (result.ok) {
-    //   let data = await result.json();
-    //   let auth = data.auth;
-    //   let name = data.data.name;
-    //   let category = data.data.category;
-    //   localStorage.setItem("auth", auth);
-    //   localStorage.setItem("User", name);
-    //   localStorage.setItem("Category", category);
-    // }
+const LoginUser = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const getData = async () => {
+    const values = await AsyncStorage.getItem("useremail");
+    console.log("value", values);
   };
-  // console.log("email", login);
+  getData();
+
+  const handleButtonClick = () => {
+    // dispatch(LoginUser({ email, password }));
+    // dispatch(LoginUser());
+    navigation.navigate("Home");
+  };
+  const nevigateSignUp = () => {
+    navigation.navigate("SignUp");
+  };
+
   return (
     <Center w="100%">
       <ScrollView>
         <Box safeArea width="screen" px="10" height="full">
           <VStack space={5}>
-            <FormControl>
-              <Image source={loginimg} alt="loginImage" height={"32"} />
-            </FormControl>
+            <Image source={loginimg} alt="loginImage" height={"32"} />
             <FormControl>
               <FormControl.Label>Email ID</FormControl.Label>
-              <Input type="email" onChangeText={(e) => setLogin(e)} />
+              <Input type="email" onChangeText={(e) => setEmail(e)} />
             </FormControl>
             <FormControl>
               <FormControl.Label>Password</FormControl.Label>
-              <Input type="password" onChangeText={(e) => setLogin(e)} />
+              <Input type="password" onChangeText={(e) => setPassword(e)} />
             </FormControl>
             <VStack>
               <Button
                 mt="3"
                 colorScheme="indigo"
                 height="12"
-                onPress={handleUserLogin}
+                onPress={handleButtonClick}
               >
                 Sign in
               </Button>
               <Button
                 className="flex-row justify-end bg-zinc-100 mt-3"
-                onPress={() => navigation.navigate("SignUp")}
+                onPress={nevigateSignUp}
               >
                 <Text className="text-indigo-600">Go for SignUp</Text>
               </Button>
