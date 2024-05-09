@@ -1,11 +1,11 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { Button, Text, VStack, View } from "native-base";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import RenderButton from "../common/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
+import { Button, View, Text, TouchableOpacity, ScrollView } from "react-native";
 
 const NavigationButton = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -21,7 +21,15 @@ const NavigationButton = ({ navigation }) => {
   const NavigateButton = () => {
     return (
       <>
-        <VStack space={5} marginTop={5}>
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: 250,
+            marginTop: 40,
+          }}
+        >
           <RenderButton
             logoIcon={<AntDesign name="user" size={24} color="black" />}
             navigation={navigation}
@@ -53,10 +61,7 @@ const NavigationButton = ({ navigation }) => {
             rightArrowIcon={<AntDesign name="right" size={24} color="black" />}
           />
 
-          <Button
-            className="bg-zinc-100 border-b-2 border-zinc-400"
-            onPress={clearstore}
-          >
+          <TouchableOpacity className="bg-zinc-100" onPress={clearstore}>
             <View className="flex-row  items-center justify-between w-full">
               <View className="flex-row items-center space-x-3">
                 <MaterialIcons name="logout" size={24} color="black" />
@@ -64,7 +69,7 @@ const NavigationButton = ({ navigation }) => {
               </View>
               <AntDesign name="right" size={24} color="black" />
             </View>
-          </Button>
+          </TouchableOpacity>
 
           {/* {seller ? (
             <RenderButton
@@ -83,7 +88,7 @@ const NavigationButton = ({ navigation }) => {
               }
             />
           ) : null} */}
-        </VStack>
+        </View>
       </>
     );
   };

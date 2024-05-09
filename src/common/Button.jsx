@@ -1,7 +1,5 @@
-import { View, Text } from "react-native";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 import React from "react";
-import { Button } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
 
 const RenderButton = ({
   renderscreen,
@@ -14,8 +12,8 @@ const RenderButton = ({
 }) => {
   return (
     <View>
-      <Button
-        className={`${bgColor} border-zinc-400 `}
+      <TouchableOpacity
+        className={`${bgColor} border-zinc-400 pb-3`}
         onPress={() => navigation.navigate(renderscreen)}
       >
         <View className="flex-row  items-center justify-between w-full">
@@ -25,7 +23,7 @@ const RenderButton = ({
           </View>
           {rightArrowIcon ? rightArrowIcon : null}
         </View>
-      </Button>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -1,9 +1,9 @@
-import { Image, ScrollView, Text, VStack, View } from "native-base";
 import RenderButton from "../common/Button";
 import cake from "../../assets/cake1.jpg";
 import pastry from "../../assets/pastry.jpg";
 import chocolate from "../../assets/chocolate.jpg";
 import icecream from "../../assets/ice.jpg";
+import { ScrollView, Text, View } from "react-native";
 
 const UploadProduct = ({ navigation }) => {
   const UploadProductButton = ({
@@ -13,7 +13,7 @@ const UploadProduct = ({ navigation }) => {
   }) => {
     return (
       <>
-        <VStack px={6} py={4} space={2}>
+        <View px={6} py={4} space={2}>
           <Image source={image} alt="productuploadimg" height={"24"} />
           <RenderButton
             rendercomponentname={rendercomponentname}
@@ -22,7 +22,7 @@ const UploadProduct = ({ navigation }) => {
             bgColor="border bg-indigo-600"
             textColor="text-white"
           />
-        </VStack>
+        </View>
       </>
     );
   };

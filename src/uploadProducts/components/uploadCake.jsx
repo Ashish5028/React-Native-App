@@ -1,18 +1,7 @@
-import {
-  Box,
-  Button,
-  Center,
-  FormControl,
-  HStack,
-  Input,
-  Image,
-  ScrollView,
-  VStack,
-} from "native-base";
 import cake from "../../../assets/cake1.jpg";
 
 import { useRef, useState } from "react";
-import { Platform } from "react-native";
+import { Button, ScrollView, View } from "react-native";
 
 const UploadCake = ({ navigation }) => {
   const [upload, setUpload] = useState();
@@ -20,30 +9,30 @@ const UploadCake = ({ navigation }) => {
   const ReUseForm = ({ type, type1, title, title1 }) => {
     return (
       <>
-        <HStack justifyContent="space-between">
+        <View justifyContent="space-between">
           {type && title ? (
-            <VStack>
+            <View>
               <FormControl.Label>{title}</FormControl.Label>
               <Input type={type} width="32" />
-            </VStack>
+            </View>
           ) : null}
           {title1 && type1 ? (
-            <VStack>
+            <View>
               <FormControl.Label>{title1}</FormControl.Label>
               <Input type={type1} width={32} />
-            </VStack>
+            </View>
           ) : null}
-        </HStack>
+        </View>
       </>
     );
   };
   return (
-    <Center w="100%">
+    <View w="100%">
       <ScrollView>
         <Image source={cake} alt="loginImage" height={"56"} />
-        <Box safeArea width="screen" px="10" height="full">
+        <View safeArea width="screen" px="10" height="full">
           <FormControl>
-            <VStack space={6}>
+            <View space={6}>
               <ReUseForm
                 title="Flavour"
                 type="text"
@@ -56,7 +45,7 @@ const UploadCake = ({ navigation }) => {
                 title1="Choose image"
                 type1="file"
               />
-              <HStack
+              <View
                 flexDirection="row"
                 justifyItems="center"
                 alignItems="center"
@@ -64,12 +53,12 @@ const UploadCake = ({ navigation }) => {
                 <Button className="w-full bg-indigo-600 h-12">
                   Save Details
                 </Button>
-              </HStack>
-            </VStack>
+              </View>
+            </View>
           </FormControl>
-        </Box>
+        </View>
       </ScrollView>
-    </Center>
+    </View>
   );
 };
 

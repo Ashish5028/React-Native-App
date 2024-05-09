@@ -1,6 +1,6 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import { ScrollView, VStack } from "native-base";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PrivacyPolicy = () => {
@@ -27,7 +27,7 @@ const PrivacyPolicy = () => {
   storeData("z,dmdslkdlk");
   return (
     <ScrollView>
-      <VStack paddingLeft={2} paddingRight={2} paddingTop={3} space={3}>
+      <View paddingLeft={2} paddingRight={2} paddingTop={3} space={3}>
         {/* <Text className="leading-5">
           <Text className="text-lg font-medium text-red-400">Note :</Text> This
           Privacy Policy forms an integral part of the Terms of Use and other
@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
           organisational measures to safeguard your Personal Information and we
           ensure that your Personal Information is saved on secure servers.
         </Text> */}
-      </VStack>
+      </View>
     </ScrollView>
   );
 };

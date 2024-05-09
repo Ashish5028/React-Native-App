@@ -1,10 +1,10 @@
-import { View, Text } from "react-native";
+import { View, ScrollView, Image, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { Button, HStack, Image, ScrollView, VStack } from "native-base";
 import loginimg from "../../assets/login.png";
+// import loginimg from "../../assets/pastry.jpg";
 import RenderButton from "../common/Button";
 import NavigationButton from "../api/navigateComponents";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,16 +23,16 @@ const AccountScreen = ({ navigation }) => {
   const UseableComp = ({ title1, title2, title1Icon, title2Icon }) => {
     return (
       <>
-        <VStack className="flex-row justify-between my-3">
-          <HStack className="border border-zinc-400  items-center w-44 py-3 space-x-3 pl-5  rounded-lg">
-            {title1Icon}
+        <View className="flex-row justify-between mt-5">
+          <View className="border border-zinc-400 flex-row justify-center items-center space-x-4  w-44 py-3  rounded-lg">
+            <Text>{title1Icon}</Text>
             <Text>{title1}</Text>
-          </HStack>
-          <HStack className="border border-zinc-400  items-center w-44 space-x-3 pl-5  rounded-lg">
-            {title2Icon}
+          </View>
+          <View className="border border-zinc-400 flex-row justify-center items-center space-x-4  w-44 py-3  rounded-lg">
+            <Text>{title2Icon}</Text>
             <Text>{title2}</Text>
-          </HStack>
-        </VStack>
+          </View>
+        </View>
       </>
     );
   };
@@ -40,7 +40,7 @@ const AccountScreen = ({ navigation }) => {
   return (
     <>
       <ScrollView>
-        <View className="space-y-5">
+        <View className="px-3">
           <View className="border-b pb-5 border-zinc-400 mt-3">
             {user && user.email && user.name ? (
               <View className="px-4 space-y-1 py-4 bg-stone-200">
@@ -48,24 +48,20 @@ const AccountScreen = ({ navigation }) => {
                 <Text>{user.email}</Text>
               </View>
             ) : (
-              <View className=" py-2 px-3 space-y-2">
-                <Image
-                  source={loginimg}
-                  alt="lognImage"
-                  height="24"
-                  marginBottom={4}
-                />
-                <RenderButton
-                  navigation={navigation}
-                  rendercomponentname="SignIn / SignUp"
-                  renderscreen="SignIn"
-                  bgColor="bg-indigo-600 h-11"
-                  textColor="text-white"
-                />
+              <View className=" py-2  space-y-2">
+                <Image source={loginimg} className="h-32  w-screen" />
+                <TouchableOpacity
+                  className="flex-row justify-center bg-indigo-600 py-4 rounded-md "
+                  onPress={() => navigation.navigate("SignIn")}
+                >
+                  <Text className="text-white font-semibold">
+                    SignIn / SignUp
+                  </Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
-          <View className="border-b border-zinc-400 pb-5 px-3">
+          <View className="border-b border-zinc-400 pb-5">
             <UseableComp
               title1="My Orders"
               title1Icon={

@@ -1,5 +1,3 @@
-import { Button, HStack, Text, View } from "native-base";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,24 +5,24 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 export default function FooterComponent({ navigation }) {
-  const [name, setName] = useState();
+  // const [name, setName] = useState();
 
-  const getData = async () => {
-    const name = await AsyncStorage.getItem("username");
-    setName(name);
-  };
-  getData();
+  // const getData = async () => {
+  //   const name = await AsyncStorage.getItem("username");
+  //   setName(name);
+  // };
+  // getData();
   const ButtonCom = ({ navigationTitle, title, titleIcon }) => {
     return (
       <>
         <View className="flex-col items-center rounded-md">
-          <Button
-            className="bg-white"
+          <TouchableOpacity
             onPress={() => navigation.navigate(navigationTitle)}
           >
             {titleIcon}
-          </Button>
+          </TouchableOpacity>
           <Text>{title}</Text>
         </View>
       </>
@@ -32,7 +30,7 @@ export default function FooterComponent({ navigation }) {
   };
   return (
     <>
-      <HStack className=" flex-row justify-between items-end">
+      <View className="flex-row justify-between px-4  bg-zinc-200 pt-4 pb-1  items-center">
         <ButtonCom
           navigationTitle="Home"
           title="Home"
@@ -50,20 +48,18 @@ export default function FooterComponent({ navigation }) {
             <MaterialCommunityIcons name="account-box-outline" size={25} />
           }
         />
-        <View className="flex-col items-center rounded-md ">
-          <Button
-            className="bg-white"
-            onPress={() => navigation.navigate("Account")}
-          >
+        <ButtonCom
+          navigationTitle="Account"
+          titleIcon={
             <MaterialCommunityIcons
               name="account-circle-outline"
               size={24}
               color="black"
             />
-          </Button>
-          {name ? <Text>{name}</Text> : <Text>Account</Text>}
-        </View>
-      </HStack>
+          }
+          title="Account"
+        />
+      </View>
     </>
   );
 }

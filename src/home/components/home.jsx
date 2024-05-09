@@ -1,33 +1,15 @@
-// Import necessary components from React Native
-import { Image, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { View, Text, ActivityIndicator } from "react-native";
-import { HStack, ScrollView, VStack } from "native-base";
-import { useDispatch } from "react-redux";
-import { addtoCart } from "../../user/userSlice";
+import { useSelector } from "react-redux";
+import bgimg from "../../../assets/cake1.jpg";
 
-const HomeComponent = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://fakestoreapi.com/products");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const responseData = await response.json();
-        setData(responseData);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
+const HomeComponent = ({ navigation }) => {
+  const { user, loading } = useSelector((state) => state?.users);
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -35,54 +17,32 @@ const HomeComponent = () => {
       </View>
     );
   }
-
   return (
-    <ScrollView>
-      {data.map((ele) => {
-        return (
-          <HStack className=" flex-col  ">
-            <HStack
-              style={[styles.card, styles.cardElevated]}
-              className="px-2 py-2 space-y-1"
-            >
-              <Image
-                source={{ uri: `${ele.image}` }}
-                className="h-20 w-20 rounded-md "
-              />
-              <Text>{ele.category}</Text>
-              <View className="flex-row items-center justify-between space-x-2">
-                <Text>{ele.rating?.count}</Text>
-                <Text>{ele.rating?.rate}</Text>
-              </View>
-            </HStack>
-          </HStack>
-        );
-      })}
-    </ScrollView>
+    <>
+      <ScrollView className="p-3">
+        {user?.map((ele) => {
+          return (
+            <>
+              <TouchableOpacity
+                className="border my-3 rounded-md p-2 flex-row items-center"
+                onPress={() => navigation.navigate("Home")}
+              >
+                <Image
+                  source={{ uri: ele.image }}
+                  style={{ width: 100, height: 100 }}
+                />
+                <View>
+                  <Text>{ele.category}</Text>
+                  <Text>{ele.title}</Text>
+                  <Text>{ele.price}</Text>
+                </View>
+              </TouchableOpacity>
+            </>
+          );
+        })}
+      </ScrollView>
+    </>
   );
 };
 
 export default HomeComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 4,
-  },
-  card: {
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 4,
-    margin: 7,
-  },
-  cardElevated: {
-    backgroundColor: "#F6F5F2",
-    elevation: 2,
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowColor: "#333",
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
-  },
-});

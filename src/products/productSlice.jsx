@@ -3,15 +3,19 @@ import { createSlice, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import {
   createDelivaryDetails,
   getButterScotchCake,
+  getChocolateApi,
   getChocolateCake,
   getFlowerCake,
   getFruitCake,
+  getIcecreamApi,
+  getPastryApi,
   getPineappleCake,
   getProductApi,
   getRedvelvetCake,
   getTruffleCake,
   getVanillaCake,
 } from "../api/apiConfig";
+import axios from "axios";
 
 // Product Details
 export const getProductDetails = createAsyncThunk("getProduct", async () => {
@@ -63,11 +67,31 @@ export const getFruitData = createAsyncThunk("getFruitData", async () => {
   const response = await axios.get(getFruitCake);
   return response.data;
 });
+
+// pastry
+export const getPastryDetails = createAsyncThunk("getPastry", async () => {
+  const response = await axios.get(getPastryApi);
+  return response.data;
+});
+// icecream
+export const getIcecreamDetails = createAsyncThunk("getIcecream", async () => {
+  const response = await axios.get(getIcecreamApi);
+  // console.log(response.data);
+  return response.data;
+});
 // PineApple Data
 export const getPineappleData = createAsyncThunk(
   "getPineappleData",
   async () => {
     const response = await axios.get(getPineappleCake);
+    return response.data;
+  }
+);
+// chocolate
+export const getChocolateDetail = createAsyncThunk(
+  "getChocolateDetail",
+  async () => {
+    const response = await axios.get(getChocolateApi);
     return response.data;
   }
 );
@@ -93,16 +117,19 @@ export const uploadDeivaryDetails = createAsyncThunk(
 const ProductSlice = createSlice({
   name: "getProduct",
   initialState: {
-    users: [],
-    cartItems: [],
-    chocolate: [],
-    butterscotch: [],
-    flower: [],
-    truffle: [],
-    velvet: [],
-    vanila: [],
-    fruitcake: [],
-    pineapple: [],
+    users: null,
+    cartItems: null,
+    chocolatefl: null,
+    butterscotchfl: null,
+    flowerfl: null,
+    trufflefl: null,
+    velvetfl: null,
+    vanilafl: null,
+    fruitcakefl: null,
+    pineapplefl: null,
+    pastry: null,
+    chocolate: null,
+    icecream: null,
     loading: false,
     error: null,
   },
@@ -120,6 +147,17 @@ const ProductSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getIcecreamDetails.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getIcecreamDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.icecream = action.payload;
+      })
+      .addCase(getIcecreamDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
       .addCase(getProductDetails.pending, (state) => {
         state.loading = true;
       })
@@ -147,7 +185,7 @@ const ProductSlice = createSlice({
       })
       .addCase(getButterScotchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.butterscotch = action.payload;
+        state.butterscotchfl = action.payload;
       })
       .addCase(getButterScotchData.rejected, (state, action) => {
         state.loading = false;
@@ -158,7 +196,7 @@ const ProductSlice = createSlice({
       })
       .addCase(getFlowercakeData.fulfilled, (state, action) => {
         state.loading = false;
-        state.flower = action.payload;
+        state.flowerfl = action.payload;
       })
       .addCase(getFlowercakeData.rejected, (state, action) => {
         state.loading = false;
@@ -169,7 +207,7 @@ const ProductSlice = createSlice({
       })
       .addCase(getTruffleData.fulfilled, (state, action) => {
         state.loading = false;
-        state.truffle = action.payload;
+        state.trufflefl = action.payload;
       })
       .addCase(getTruffleData.rejected, (state, action) => {
         state.loading = false;
@@ -180,7 +218,7 @@ const ProductSlice = createSlice({
       })
       .addCase(getRedvelvetData.fulfilled, (state, action) => {
         state.loading = false;
-        state.velvet = action.payload;
+        state.velvetfl = action.payload;
       })
       .addCase(getRedvelvetData.rejected, (state, action) => {
         state.loading = false;
@@ -191,7 +229,7 @@ const ProductSlice = createSlice({
       })
       .addCase(getVanillaData.fulfilled, (state, action) => {
         state.loading = false;
-        state.vanila = action.payload;
+        state.vanilafl = action.payload;
       })
       .addCase(getVanillaData.rejected, (state, action) => {
         state.loading = false;
@@ -202,7 +240,7 @@ const ProductSlice = createSlice({
       })
       .addCase(getFruitData.fulfilled, (state, action) => {
         state.loading = false;
-        state.fruitcake = action.payload;
+        state.fruitcakefl = action.payload;
       })
       .addCase(getFruitData.rejected, (state, action) => {
         state.loading = false;
@@ -213,9 +251,31 @@ const ProductSlice = createSlice({
       })
       .addCase(getPineappleData.fulfilled, (state, action) => {
         state.loading = false;
-        state.pineapple = action.payload;
+        state.pineapplefl = action.payload;
       })
       .addCase(getPineappleData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(getPastryDetails.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getPastryDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.pastry = action.payload;
+      })
+      .addCase(getPastryDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(getChocolateDetail.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getChocolateDetail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.chocolate = action.payload;
+      })
+      .addCase(getChocolateDetail.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error;
       });
